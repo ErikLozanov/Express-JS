@@ -1,7 +1,12 @@
 const express = require("express");
+const handlebars = require("express-handlebars");
 const PORT = 5000;
 const path = require("path");
 const app = express();
+
+// View Engine
+app.engine('hbs', handlebars.engine({extname: "hbs"}));
+app.set("view engine", "hbs");
 
 //**  MIDDLEWARE start */
 // third-party middleware
