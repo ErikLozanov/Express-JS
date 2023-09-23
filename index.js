@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 
 // View Engine
-app.engine('hbs', handlebars.engine({extname: "hbs"}));
+app.engine("hbs", handlebars.engine({extname: "hbs"}));
 app.set("view engine", "hbs");
 
 //**  MIDDLEWARE start */
@@ -23,8 +23,8 @@ app.use((req,res ,next) => {
 })
 
 // partial routing middleware
-app.use('/kittens', (req, res, next) => {
-    console.log('Kittens middleware has been invoked!');
+app.use("/kittens", (req, res, next) => {
+    console.log("Kittens middleware has been invoked!");
     next();
 });
 
@@ -41,13 +41,18 @@ const specificMiddleware = (req, res, next) => {
 
 
 // app http methods - get, post, put, patch, delete (most used)
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     //
-    res.send("Welcome, this is home page!");
+    // res.send("Welcome, this is home page!");
+    res.render("home");
 });
 
-app.get('/specific', specificMiddleware, (req, res) => {
-    res.send('This is specific route  ;)');
+app.get("/about", (req,res) => {
+    res.render("about")
+})
+
+app.get("/specific", specificMiddleware, (req, res) => {
+    res.send("This is specific route  ;)");
 })
 
 // Endpoint -> method, path, ACTION
@@ -106,9 +111,9 @@ app.get("/route-that-will-be-redirected", (req,res) => {
 
 // WILDCARD *
 //**  ROUTING END */
-app.get('*', (req, res) => {
+app.get("*", (req, res) => {
     res.status(404);
-    res.send('Sorry page is not found ;(')
+    res.send("Sorry page is not found ;(")
 })
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
